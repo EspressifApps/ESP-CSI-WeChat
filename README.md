@@ -9,34 +9,34 @@
 由于使用微信登录获取云端数据是要用到微信的 openId，这里将通过云函数直接获取
 
 ### 首先修改 appid
-![appid]
+![](md-image/appid.png)
 
 ### 创建云函数
-![create1]
+![](md-image/create1.png)
 
-![create2]
+![](md-image/create2.png)
 
 
 ### 点击新建云函数(由于代码中已经建好了一个 ‘login’ 的函数，需在该处创建一个同名)
 
 
-![create3]
+![](md-image/create3.png)
 
 
 ### 云函数创建好之后本地同步
 
 
-![create4]
+![](md-image/create4.png)
 
 ## 开发工具配置
 
 
-![create5]
+![](md-image/create5.png)
 
 ## 小程序配置
 ### 需将 appkey 和 secretKey改为用户自己在腾讯云[创建的应用](https://console.cloud.tencent.com/iotexplorer/project/prj-6vabuy8g/app/list)中小程序应用的 appkey 和 secretKey
 
-![create6]
+![](md-image/create6.png)
 
 
 ## 小程序扫描设备二维码
