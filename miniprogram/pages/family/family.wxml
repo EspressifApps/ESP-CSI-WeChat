@@ -1,0 +1,28 @@
+<view class="container">
+  <view  class="item">
+    <view class="item-content flex flex-ac flex-jcb">
+      <view>家庭名称</view>
+      <view class='name'>{{familyName}}的家</view>
+    </view>
+  </view>
+  <view  class="item">
+    <view class="item-content  flex flex-ac flex-jcb">
+      <view>房间管理</view>
+      <view class='name'>0个房间</view>
+    </view>
+  </view>
+  <view  class="item">
+   <view class="item-content flex flex-ac flex-jcb">
+      <view>邀请家庭成员</view>
+      <text class="iconfont icon-right"></text>
+    </view>
+  </view>
+  <view class="title">家庭成员</view>
+  <view data-index="{{item.UserID}}" wx:for="{{memberList}}" class="item" wx:key="{{item.DeviceId}}">
+    <view class="item-content flex flex-ac flex-jcb">
+      <image class="img" mode="aspectFit" src="{{item.Avatar}}"></image>
+      <view class="flex-1">{{item.NickName}}</view>
+      <view class='name'>{{item.Role == 1 ? "所有者" : "成员"}}</view>
+    </view>
+  </view>
+</view>

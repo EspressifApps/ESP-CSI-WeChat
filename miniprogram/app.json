@@ -1,0 +1,25 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/softap/softap",
+    "pages/authorize/authorize",
+    "pages/operate/operate",
+    "pages/user/user",
+    "pages/family/family",
+    "pages/dataList/dataList"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#e8352c",
+    "navigationBarTitleText": "ESP CSI",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于小程序获取 WiFi 列表"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

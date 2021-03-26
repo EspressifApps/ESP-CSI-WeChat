@@ -1,0 +1,117 @@
+<view class="page">
+  <view class="header">
+    <view catchtap="switchType" data-value="0" class="header-light color-light {{isType == 0 ? 'active' : ''}}"><text>灯光控制</text></view>
+    <view catchtap="switchType" data-value="1"  class="header-light white-ligh {{isType == 1 ? 'active' : ''}}"><text>Wi-Fi 雷达</text></view>
+  </view>
+  <view hidden="{{isType == 1}}" class="light-wrapper">
+    <view class="canvasWrap">
+      <canvas bindtouchstart="getColor" type="2d" class="canvas" id="firstCanvas"></canvas>
+    </view>
+    <view  class="slider-wrapper">
+      <view class="slider-item">
+        <view class="slider-label flex flex-jcb border-bottom">
+          <text class="label">亮度</text><text>{{currentLuminanceText}}%</text>
+        </view>
+        <view class="slider-content">
+          <slider bindchange="editDeviceL" bindchanging="changeDeviceL"  value="{{currentLuminance}}" min="0" activeColor="#ffffff" backgroundColor="#999" block-size="25" max="100"/>
+        </view>
+      </view>
+      <view class="slider-item">
+        <view class="slider-label flex flex-jcb border-bottom ">
+          <text class="label">饱和度</text><text>{{currentSaturationText}}%</text>
+        </view>
+         <view class="slider-content">
+          <slider bindchange="editDeviceS" bindchanging="changeDeviceS"  value="{{currentSaturation}}" min="0" activeColor="#ffffff" backgroundColor="#999" block-size="25" max="100"/>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{isType == 0}}" class="radar-wrap">
+    <view class="radar-content">
+      <view id="radar">
+        <view class="round"></view>
+        <view class="line {{deviceInfo['wifi_rader_status'] == 1 ? '' : 'animation-play-state-paused'}}"></view>
+      </view>
+      <view class="radar-status">
+        <view catchtap="showDataList" data-value="{{ROOM_STATUS_TEXT}}" class="room-status-item">
+          <view class="title">房间状态</view>
+          <view class="desc">{{deviceInfo['wifi_rader_room_status'] == 0 ? '没人' : '有人'}}</view>
+        </view>
+        <view catchtap="showDataList" data-value="{{AWAKE_COUNT_TEXT}}" class="room-status-item">
+          <view class="title">活动次数</view>
+          <view class="desc">{{deviceInfo['wifi_rader_awake_count']}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="item-wrap">
+      <view class="item">
+        <text>Wi-Fi 雷达状态</text><switch color="#e8352c" checked="{{deviceInfo['wifi_rader_status'] == 1}}" bindchange="changeRadarStatus"/>
+      </view>
+    </view>
+    <view class="item-wrap">
+      <view class="item">
+        <text>Wi-Fi 雷达阈值校准</text><switch color="#e8352c" checked="{{adjustThreshold}}" bindchange="changeThresholdStatus"/>
+      </view>
+    </view>
+    <!-- <view class="item-wrap">
+      <view class="item-content">
+        <view class="item-title"><text>Wi-Fi 雷达人体检测阈值</text><text>{{humanDetect}}</text></view>
+        <view class="slider-content">
+          <slider bindchange="changHumanDetect" bindchanging="editHumanDetect"  value="{{humanDetect}}" activeColor="#e8352c" backgroundColor="#999" block-size="25" step="0.01"  min="0" max="1"/>
+        </view>
+      </view>
+    </view> -->
+    <view class="item-wrap">
+      <view class="item-content">
+        <view class="item-title"><text>Wi-Fi 雷达人体活动阈值</text><text>{{humanMove}}</text></view>
+        <view class="slider-content">
+          <slider bindchange="changHumanMove" bindchanging="editHumanMove"  value="{{humanMove}}" activeColor="#e8352c" backgroundColor="#999" block-size="25" step="0.01"  min="0" max="1"/>
+        </view>
+      </view>
+    </view>
+    <view class="item-wrap">
+      <view catchtap="showSelectMac" class="item">
+        <text>Wi-Fi 雷达数据来源</text><view class="flex"><text class="item-desc">{{curDataMac}}</text><text class="espressif icon-right"></text></view>
+      </view>
+    </view>
+    <view class="item-wrap">
+      <view catchtap="showRadarData" class="item">
+        <text>Wi-Fi 雷达数据</text><text class="espressif icon-right"></text>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{!isOperate}}" class="operate-wrap">
+      <view class="mask"></view>
+      <view class="operate-content">
+        <view class="title">雷达数据来源</view>
+        <view class="content">
+          <radio-group bindchange="radioChange">
+            <view class="radio-wrap">
+              <radio  id="{{curMac}}" value="{{curMac}}" checked="{{selectedMac === curMac}}"></radio>
+              <label class="label-2-text" for="{{curMac}}"><text>{{deviceName}} ({{curMac}})</text></label>
+            </view>
+            <view class="radio-wrap">
+              <radio id="{{apBssid}}" value="{{apBssid}}" checked="{{selectedMac === apBssid}}"></radio>
+              <label class="label-2-text" for="{{apBssid}}"><text>{{apName}} ({{apBssid}})</text></label>
+            </view>
+            <view class="radio-wrap">
+              <radio id="custom" value="custom" checked="{{selectedMac === 'custom'}}"></radio>
+              <label class="label-2-text" for="custom"><text>自定义</text></label>
+            </view>
+          </radio-group>
+          <view hidden="{{!isCustom}}" class="form-wrap">
+            <input maxlength="2" bindinput='inputChange' data-value='macOne' value="{{macOne}}"  class="input-mac"/>
+            <input maxlength="2" bindinput='inputChange' data-value='macTwo'  value="{{macTwo}}"  class="input-mac"/>
+            <input maxlength="2" bindinput='inputChange' data-value='macThree'  value="{{macThree}}"  class="input-mac"/>
+            <input maxlength="2" bindinput='inputChange' data-value='macFour'  value="{{macFour}}"  class="input-mac"/>
+            <input maxlength="2" bindinput='inputChange' data-value='macFive'  value="{{macFive}}"  class="input-mac"/>
+            <input maxlength="2" bindinput='inputChange' data-value='macSix'  value="{{macSix}}"  class="input-mac"/>
+          </view>
+        </view>
+        <view class="footer-wrap">
+          <button catchtap="hideSelectMac" class="btn btn-cancel">取消</button>
+          <button catchtap="confirmSelect" class="btn btn-confirm">确定</button>
+        </view>
+      </view>
+    </view>
+</view>

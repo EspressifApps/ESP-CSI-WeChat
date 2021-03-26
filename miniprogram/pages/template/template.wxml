@@ -1,0 +1,13 @@
+
+<template name="footer">
+  <view class="footer-wrapper">
+  <navigator url="/pages/index/index" hover-class="none" open-type="redirect" class="footer-name {{text == 'index' ? 'color-red' : ''}}">
+    <text class='iconfont icon-light font22'></text>
+    <text>设备</text>
+  </navigator>
+  <navigator url="/pages/user/user" hover-class="none" open-type="redirect"  class="footer-name {{text == 'user' ? 'color-red' : ''}}">
+    <text class='iconfont icon-user font20'></text>
+    <text>我的</text>
+  </navigator>
+</view>
+</template>

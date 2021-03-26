@@ -1,0 +1,42 @@
+<view class="container">
+  <view class='header-wrapper flex flex-jcc flex-ac'>
+    <view class="water-wrap">
+      <view class="img-wrap"><image class="wifi-image" mode="aspectFit" src="../../images/wifi.png"></image></view>
+      <view class="water water1"></view>
+      <view class="water water2"></view>
+      <view class="water water3"></view>
+      <view class="water water4"></view>
+    </view>
+  </view>
+  <view class="content-wrapper ">
+    <view class="item flex">
+      <label>SSID:</label><input class="felx-1" placeholder="请输入WI-FI名称" placeholder-class="placeholder-color" value="{{wifiName}}" bindinput="bindNameInput" ></input>
+      <view catchtap="showWifiList" class="icon-wrap">
+        <text class="espressif icon-right"></text>
+      </view>
+    </view>
+    <view class="item flex pwd-wrap">
+      <label>Password:</label>
+      <input class="felx-1" placeholder="{{secure ? '请输入WI-FI密码' : '当前WiFi不需要输入密码'}}" placeholder-class="placeholder-color" value="{{wifiPwd}}" disabled="{{!secure}}" bindinput="bindPasswordInput" ></input>
+    </view>
+    <button catchtap="connectDeviceWiFi" class="btn {{!isConnectSuc ? 'gray': ''}}">
+      开始
+    </button> 
+    <button hidden="{{isConnectSuc}}" catchtap="connectDeviceWiFi" class="btn reconnection-btn">
+      重连
+    </button>
+  </view>
+  <view hidden="{{!isShowList}}" class="model-wrap">
+    <view catchtap="hideWifiList" class="mask"></view>
+    <view class="model-content flex flex-v">
+      <view class="title">WiFi列表 <text catchtap="getWifiListWay" class="refresh">刷新</text></view>
+      <view class="wifi-list">
+        <view class="model-item flex flex-jcb flex-ac  {{item.BSSID == wifiBssid ? 'red' : ''}}" catchtap="selectWifiInfo" data-index="{{index}}" wx:for="{{wifiList}}" wx:key="index"><view class="name">{{item.SSID}}</view><view class="icon"><image class="img" src="../../images/{{item.icon}}{{item.BSSID == wifiBssid ? '-active' : ''}}.svg"></image></view></view>
+      </view>
+      <view catchtap="hideWifiList" class="footer">取消</view>
+    </view>
+  </view>
+</view>
+
+
+

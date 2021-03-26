@@ -1,0 +1,10 @@
+<view class="container">
+  <view hidden="{{logged}}" class="authorize-wrap">
+    <view class="flex flex-ac flex-jcc">
+      <image class="authorize-img" src="../../images/authorize.png"></image>
+    </view>
+    <view class="title">乐鑫连连，连接智慧生活</view>
+    <view class="desc">乐鑫连连可远程操控智能设备，实现智能场景联动，使用前需要您授权登录</view>
+    <button open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" class="btn">立即授权</button>
+  </view>
+</view>

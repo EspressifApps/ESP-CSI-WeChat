@@ -1,0 +1,36 @@
+<!--pages/dataList/dataList.wxml-->
+<view class="data-wrap container">
+    <view class="middle">
+      <view class="middle-content">
+        <view class="title">{{lineTitle}}</view>
+        <view class="canvas-wrap" hidden="{{fieldNameFlag}}">
+          <view class="name-count">
+            <text catchtap="getDataByTime" data-value="{{TIME_HOUR}}" class="{{curType == TIME_HOUR ? 'active': ''}}">时</text>
+            <text catchtap="getDataByTime" data-value="{{TIME_DAY}}"  class="{{curType == TIME_DAY ? 'active': ''}}">日</text>
+            <text catchtap="getDataByTime" data-value="{{TIME_WEEK}}"  class="{{curType == TIME_WEEK ? 'active': ''}}">周</text>
+          </view>
+          <swiper circular="true">
+            <block wx:for="{{ecBar}}" wx:key="index">
+              <swiper-item>
+                <view class="view-wrap">
+                  <view hidden="{{curType == TIME_WEEK}}" class="time-title">{{item.key}}</view>
+                  <view class="canvas" >
+                    <ec-canvas canvas-id='index' ec="{{item['obj']}}"></ec-canvas>
+                  </view>
+                </view>
+              </swiper-item>
+            </block>
+          </swiper>
+        </view>
+        <view class="canvas" hidden="{{!fieldNameFlag}}">
+          <ec-canvas  canvas-id='chart-line'  ec="{{ecLine}}"></ec-canvas>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{!fieldNameFlag}}" class="bottom">
+      <view class="title">{{barTime}}</view>
+      <view class="bottom-content canvas">
+        <ec-canvas canvas-id='chart-pie' ec="{{ecPie}}" ></ec-canvas>
+      </view>
+    </view>
+  </view>

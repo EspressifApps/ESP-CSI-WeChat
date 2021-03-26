@@ -1,0 +1,75 @@
+.data-wrap {
+  height: 100%;
+  width: 100vw;
+  padding: 20px 10px 50px;
+  box-sizing: border-box;
+}
+.data-wrap .middle,
+.data-wrap .bottom {
+  width: 100%;
+  position: relative;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px #fff;
+}
+.data-wrap .bottom {
+  margin-top: 20px;
+}
+.data-wrap .middle .title,
+.data-wrap .bottom .title{
+  padding: 15px 10px 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.middle-content .title text {
+  font-size: 14px;
+  font-weight: normal;
+}
+.canvas {
+  width: 100%;
+  margin-top: 15px;
+  padding: 0 15px;
+  height: 320px;
+  width: calc(100vw - 20px);
+  box-sizing: border-box;
+}
+.name-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.name-count text {
+  display: inline-block;
+  width: 90px;
+  padding: 4px 0;
+  border: 1px solid #aaaaaa;
+  border-right: none;
+  text-align: center;
+}
+.name-count text:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.name-count text:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-right: 1px solid #aaaaaa;
+}
+.name-count text.active {
+  background: #e8352c;
+  border-color: #e8352c;
+  color: #fff;
+}
+.canvas-wrap {
+  height: 430px;
+}
+swiper {
+  height: 100% !important;
+}
+.time-title {
+  margin-top: 5px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+}

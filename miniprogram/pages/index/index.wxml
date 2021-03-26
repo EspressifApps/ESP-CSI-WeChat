@@ -1,0 +1,63 @@
+<!-- <import src="/pages/template/template.wxml"/> -->
+<view class="container">
+  <view class="input-info">
+    <view class='input-group'>
+      <text class="iconfont icon-search"></text>
+      <input type="search" placeholder-class="input-placeholder" class="form-control search-input" bindinput="bindViewSearch" placeholder="搜索名称"/>
+    </view>
+    <view bindtap="addDevice" class="input-plus">
+      <text class="espressif icon-QR-code"></text>
+    </view>
+  </view>
+  <view class="content-wrap">
+    <view data-index="{{index}}" wx:for="{{deviceList}}" class="item" bindtap='showInfo' bindlongpress="showOperate" wx:key="index">
+      <view class="item-img item-bg">
+        <text class="bluetooth-img espressif icon-light {{item.power_switch == 1 ? 'blue' : 'gray'}}" ></text>
+      </view>
+      <view class="item-name flex flex-v">
+        <text class="text-name">{{item.DeviceName}}</text>
+        <text class="text-desc">{{item.subType}}</text>
+      </view>
+      <view class="item-power">
+        <view class="switch-wrapper">
+            <text data-index="{{index}}" class="{{item.power_switch == 0 ? 'active' : ''}}" catchtap="closeDevice">OFF</text>
+            <text data-index="{{index}}" class="{{item.power_switch == 1 ? 'active' : ''}}" catchtap="openDevice">ON</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{!showAddBtn}}"  class="add-wrapper">
+      <view class="add-icon-wrapper">
+        <image mode="aspectFit" class="add-image" src="../../images/light-logo.png"></image>
+        <view class="add-line"></view>
+      </view>
+      <view class="add-title">暂时还没有设备哦！</view>
+      <view class="add-desc">点击右上角或下方按钮进行扫码添加吧</view>
+      <view  class="add-plus" catchtap="addDevice">
+          扫码添加
+      </view>
+    </view>
+</view>
+<view>
+  <view class="operate-wrapper  {{isOperate ? 'moves-enter-active' : 'moves-enter'}}">
+    <view bindtap='hideOperate' class="mask"></view>
+    <view class="operate-info">
+      <view class="operate-name">
+        <view class="operate-icon-wrapper"><text class="bluetooth-img espressif icon-light operate-icon {{deviceInfo.power_switch == 1 ? 'blue' : 'gray'}}"></text>{{deviceInfo.DeviceName}}</view>
+        <view class="item-power">
+          <view class="switch-wrapper">
+                  <text data-index="{{deviceIndex}}" class="{{deviceInfo.power_switch == 0 ? 'active' : ''}}" catchtap="closeDevice">OFF</text>
+                  <text data-index="{{deviceIndex}}" class="{{deviceInfo.power_switch  == 1 ? 'active' : ''}}" catchtap="openDevice">ON</text>
+          </view>
+        </view>
+      </view>
+      <view catchtap='delDevice' class="operate-item">
+        <view class='icon-orange'>重置设备</view>
+      </view>
+      <view catchtap='hideOperate' class="operate-item margintop15">
+        <view>取消</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- <template is="footer"  data="{{text: 'index'}}"/> -->

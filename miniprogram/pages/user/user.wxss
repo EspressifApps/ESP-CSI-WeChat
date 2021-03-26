@@ -1,0 +1,26 @@
+/* pages/user/user.wxss */
+.user-item {
+  padding: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #ddd;
+}
+.img {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 30rpx;
+  border-radius: 20rpx;
+}
+.item {
+  padding: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid #ddd;
+}
+.item-icon {
+  margin-right: 30rpx;
+}
+.item .icon-jiating {
+  color: #e8352c;
+  font-size: 56rpx;
+}

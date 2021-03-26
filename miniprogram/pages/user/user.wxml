@@ -1,0 +1,16 @@
+<!--pages/user/user.wxml-->
+<import src="/pages/template/template.wxml"/>
+<view class="container">
+  <view class="user-item flex flex-ac">
+    <image class="img" mode="aspectFit" src="{{userInfo.avatarUrl}}"></image>
+    <view>{{userInfo.nickName}}</view>
+  </view>
+  <view catchtap="showFamily" class="item flex flex-ac flex-jcb">
+    <view class="item-icon">
+      <text class="iconfont icon-jiating"></text>
+    </view>
+    <view class="flex-1">家庭管理</view>
+    <text class="iconfont icon-right"></text>
+  </view>
+</view>
+<template is="footer"  data="{{text: 'user'}}"/>

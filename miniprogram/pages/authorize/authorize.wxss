@@ -1,0 +1,29 @@
+.container {
+  background: #fff;
+}
+.authorize-wrap {
+  width: 100vw;
+  height: 100vh;
+  padding: 0 50rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+.authorize-img {
+  width: 70vw;
+  height: 40vw;
+  margin: 50rpx auto 30rpx;
+}
+.title {
+  font-size: 40rpx;
+  text-align: center;
+}
+.desc {
+  font-size: 30rpx;
+  text-align: center;
+  margin: 100rpx 0;
+}
+.btn {
+  background: #e8352c;
+  width: 100% !important;
+  color: #fff;
+}
