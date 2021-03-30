@@ -100,12 +100,9 @@
             </view>
           </radio-group>
           <view hidden="{{!isCustom}}" class="form-wrap">
-            <input maxlength="2" bindinput='inputChange' data-value='macOne' value="{{macOne}}"  class="input-mac"/>
-            <input maxlength="2" bindinput='inputChange' data-value='macTwo'  value="{{macTwo}}"  class="input-mac"/>
-            <input maxlength="2" bindinput='inputChange' data-value='macThree'  value="{{macThree}}"  class="input-mac"/>
-            <input maxlength="2" bindinput='inputChange' data-value='macFour'  value="{{macFour}}"  class="input-mac"/>
-            <input maxlength="2" bindinput='inputChange' data-value='macFive'  value="{{macFive}}"  class="input-mac"/>
-            <input maxlength="2" bindinput='inputChange' data-value='macSix'  value="{{macSix}}"  class="input-mac"/>
+            <block wx:for="{{inputLength}}" wx:key="*this">
+              <input maxlength="2" bindinput='inputChange' focus="{{inputFocus[index]}}" data-value='{{index}}' value="{{macOne}}"  class="input-mac"/>
+            </block>
           </view>
         </view>
         <view class="footer-wrap">

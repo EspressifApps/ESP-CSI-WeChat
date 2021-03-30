@@ -112,7 +112,7 @@ Page({
   },
   addDevice () {
     if (!wx.getStorageSync("appToken")) {
-      util.showCancelModal('乐鑫连连可远程操控智能设备，实现智能场景联动，使用前需要您授权登录', '前往授权', '授权提示').then(() => {
+      util.showCancelModal('ESP CSI 可远程操控智能设备，实现智能场景联动，使用前需要您授权登录', '前往授权', '授权提示').then(() => {
         wx.reLaunch({
           url: '/pages/authorize/authorize'
         })

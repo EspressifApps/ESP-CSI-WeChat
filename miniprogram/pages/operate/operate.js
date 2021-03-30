@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    inputLength: 6,
     height: 0,
     width: 0,
     deviceInfo: {},
@@ -39,14 +40,10 @@ Page({
     selectedMac: '',
     mac: '',
     apBssid: '', 
-    macOne: '',
-    macTwo: '',
-    macThree: '',
-    macFour: '',
-    macFive: '',
-    macSix: '',
     ROOM_STATUS_TEXT: 'wifi_rader_room_status',
-    AWAKE_COUNT_TEXT: 'wifi_rader_awake_count'
+    AWAKE_COUNT_TEXT: 'wifi_rader_awake_count',
+    inputFocus: [false, false, false, false, false, false],
+    inputValue: ['', '', '', '', '', '']
   },
   // 初始化色彩
   initColor: function () {
@@ -121,14 +118,17 @@ Page({
       humanMove: parseFloat(e.detail.value).toFixed(2)
     })
   },
-  changHumanMove () {
+  changHumanMove (e) {
     var self = this
+    this.setData({
+      humanMove: parseFloat(e.detail.value).toFixed(2)
+    })
     wx.showModal({
       title: '系统提示',
       content: '确定修改 Wi-Fi 雷达人体活动阈值吗？',
       success(res) {
         if (res.confirm) {
-          elf.controlDeviceData({'wifi_rader_human_move': parseFloat(self.data.humanMove)})
+          self.controlDeviceData({'wifi_rader_human_move': parseFloat(self.data.humanMove)})
         } else if (res.cancel) {
           self.setData({
             humanMove: self.data.deviceInfo['wifi_rader_human_move']
@@ -210,41 +210,21 @@ Page({
     qcloud.postData(JSON.stringify(data), this.data.productId, this.data.deviceName);
   },
   inputChange (e) {
-    const self = this
-    var val = e.detail.value
-    switch (e.target.dataset.value) {
-      case 'macOne': 
-       self.setData({
-        macOne: val
-       })
-       break;
-      case 'macTwo': 
-       self.setData({
-        macTwo: val
-       })
-       break;
-      case 'macThree': 
-       self.setData({
-        macThree: val
-       })
-       break;
-      case 'macFour': 
-       self.setData({
-        macFour: val
-       })
-       break;
-      case 'macFive': 
-       self.setData({
-        macFive: val
-       })
-       break;
-      case 'macSix': 
-       self.setData({
-        macSix: val
-       })
-       break;
-       default: break;
+    let val = e.detail.value
+    let index = e.target.dataset.value
+    console.log(index)
+    if (val.length >= 2 && (index+1) < 6) {
+      this.setData({
+        [`inputFocus[${index+1}]`]: true,
+      })
+    } else if (val.length == 0 && (index-1) >= 0) {
+      this.setData({
+        [`inputFocus[${index-1}]`]: true,
+      })
     }
+    this.setData({
+      [`inputValue[${index}]`]: val
+    })
   },
   radioChange (e) {
     this.setData({
@@ -270,33 +250,28 @@ Page({
       isOperate: true
     })
     if (this.data.dataMac !== this.data.apBssid && this.data.dataMac !== this.curMac) {
-      var [macOne, macTwo, macThree, macFour, macFive, macSix] = this.data.dataMac.split(':')
+      var inputValue = this.data.dataMac.split(':')
       this.setData({
-        macOne: macOne,
-        macTwo: macTwo,
-        macThree: macThree,
-        macFour: macFour,
-        macFive: macFive,
-        macSix: macSix,
+        inputValue: inputValue,
         selectedMac: 'custom',
         isCustom: true
       })
       return;
     }
     this.setData({
-      macOne: '',
-      macTwo: '',
-      macThree: '',
-      macFour: '',
-      macFive: '',
-      macSix: ''
+      inputValue: ['', '', '', '', '', '']
     })
     this.selectedMac = this.dataMac
   },
   confirmSelect () {
     var mac = ''
     if (this.data.selectedMac === 'custom') {
-      mac = [this.data.macOne, this.data.macTwo, this.data.macThree, this.data.macFour, this.data.macFive, this.data.macSix].join(':')
+      var list = this.data.inputValue.filter(item => util.isEmpty(item))
+      if(list.length > 0) {
+        util.showToast('请输入正确的 Mac ')
+        return
+      }
+      mac = this.data.inputValue.join(':')
     } else {
       mac = this.data.selectedMac
     }
@@ -416,7 +391,7 @@ Page({
    */
   onShareAppMessage: function (res) {
     return {
-      title: '乐鑫连连',
+      title: 'ESP CSI',
       path: '/pages/index/index'
     }
   },

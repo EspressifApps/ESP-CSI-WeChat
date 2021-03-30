@@ -47,6 +47,7 @@
   padding: 12rpx 30rpx;
   background: #fff;
   box-sizing: border-box;
+  border-bottom: 2rpx solid #e7e7e7;
 }
 .item-img {
   flex: 0 0 100rpx;
