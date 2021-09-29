@@ -217,8 +217,8 @@ const getDevicesStatus = (deviceIds, productId, deviceList) => {
       store.deviceList = deviceList;
     }
     wx.hideLoading();
-  }).catch((res) => {
-    console.error(res);
+  }).catch((err) => {
+    console.error(err);
     wx.hideLoading();
   });
   
@@ -241,14 +241,14 @@ const getDevicesData = (deviceNames, productId, deviceList) => {
         }
         store.deviceList = deviceList;
       }
-    }).catch((res) => {
-      console.error(res);
+    }).catch((err) => {
+      console.error(err);
       wx.hideLoading();
     });
   })
 }
 const activePush = (deviceIds) => {
-  wx.connectSocket({"url": "wss://iot.cloud.tencent.com/ws/explorer"  });
+  wx.connectSocket({"url": "wss://iot.cloud.tencent.com/ws/explorer"});
   wx.onSocketOpen(res => {
     var data = JSON.stringify({
       "action": "ActivePush",

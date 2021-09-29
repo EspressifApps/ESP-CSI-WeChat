@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/operate/operate",
     "pages/softap/softap",
     "pages/authorize/authorize",
-    "pages/operate/operate",
     "pages/user/user",
     "pages/family/family",
     "pages/dataList/dataList"
